@@ -1,0 +1,28 @@
+import { RouterContext } from "https://deno.land/x/oak@v11.1.0/router.ts";
+import { ObjectId } from "https://deno.land/x/mongo@v0.31.1/mod.ts";
+import { objetosCollection } from "../db/mongo.ts";
+
+type DeleteObjetoContext  = RouterContext<
+    "/objeto/:id",
+    {
+        id: string;
+    } & Record<string | number, string | undefined>,
+    Record<string, any>
+>;
+
+export const deleteObjeto =async (context:DeleteObjetoContext) => {
+    try{
+        if (context.params?.id) {
+            const objetoAEliminar = await objetosCollection.deleteOne({
+                _id: new ObjectId(context.params.id),
+            });
+            if (objetoAEliminar)
+                context.response.status = 200;
+            else
+                context.response.status = 404;
+        }
+    } catch (e) {
+        console.error(e);
+        context.response.status = 500;
+      }
+}

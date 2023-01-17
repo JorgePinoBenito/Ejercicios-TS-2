@@ -1,0 +1,30 @@
+***API_REST***
+
+//errores con ifs y que no esten el catch final
+context.response.status = 406;
+return;
+
+ctx.response.status = 409;
+ctx.response.body = { message: "Slot already exists and is not free" };
+return;
+
+//errores en el catch final
+catch (e) {
+    console.error(e);
+    context.response.status = 500;
+}
+
+catch (error) {
+    context.response.status = 500;
+    context.response.body = { message: error.message };
+  }
+
+***GRAPHQL***
+
+//errores con ifs y que no esten el catch final
+throw new Error("Faltan datos");
+
+//errores en el catch final
+catch (e) {
+      throw new Error(e);
+}

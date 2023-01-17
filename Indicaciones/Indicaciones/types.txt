@@ -1,0 +1,5 @@
+export type Objeto = {
+    id: string;
+    campo1: number;
+    campoN: string;
+};

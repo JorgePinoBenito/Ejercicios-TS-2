@@ -1,0 +1,14 @@
+{
+    "imports": {
+        "dotenv": "https://deno.land/x/dotenv@v3.2.0/mod.ts",
+        "mongo": "https://deno.land/x/mongo@v0.31.1/mod.ts",
+        "lodash": "https://raw.githubusercontent.com/lodash/lodash/4.17.21-es/lodash.js",
+        "oak":"https://deno.land/x/oak@v11.1.0/mod.ts",
+        "oak_graphql": "https://deno.land/x/oak_graphql@0.6.2/mod.ts",
+        "gql": "https://deno.land/x/gql@1.1.2/mod.ts",
+        "gql_tag": "https://deno.land/x/graphql_tag@0.0.1/mod.ts",
+        "gql_tools": "https://deno.land/x/graphql_tools@0.0.3/mod.ts",
+        "bcrypt":  "https://deno.land/x/bcrypt@v0.4.1/mod.ts",
+        "jwt": "https://deno.land/x/djwt@v2.8/mod.ts"
+    }
+}

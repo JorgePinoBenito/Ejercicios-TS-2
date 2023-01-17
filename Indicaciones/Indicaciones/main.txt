@@ -1,0 +1,22 @@
+import { Application, Router } from "https://deno.land/x/oak@v11.1.0/mod.ts";
+
+import { getObjeto, getObjetos,..., (todas las funciones del get.ts) } from "./resolvers/get.ts";
+import { postAddObjeto,..., (todas las funciones del post.ts) } from "./resolvers/post.ts";
+import { putObjeto,...,(todas las funciones del put.ts) } from "./resolvers/put.ts";
+import { deleteObjeto,..., (todas las funciones del delete.ts) } from "./resolvers/delete.ts";
+
+const router = new Router();
+
+router
+    .get("/ruta", getObjeto)
+    .post("/ruta", postAddObjeto)
+    .put("/ruta", putObjeto)
+    .delete("ruta", deleteObjeto);
+
+
+const app = new Application();
+
+app.use(router.routes());
+app.use(router.allowedMethods());
+
+await app.listen({port: 7777});

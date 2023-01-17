@@ -1,0 +1,50 @@
+import { ObjectId } from "https://deno.land/x/mongo@v0.31.1/mod.ts";
+import { RouterContext } from "https://deno.land/x/oak@v11.1.0/router.ts";
+import { objetosCollection } from "../db/mongo.ts";
+import { ObjetoSchema } from "../db/schemas.ts";
+
+
+
+
+//TIPACION CONTEXTOS
+type GetObjetosContext = RouterContext<
+    "/objetos",
+    Record<string | number, string | undefined>,
+    Record<string, any>
+>;
+
+type GetObjetoContext = RouterContext<
+    "/objeto/:id",
+    {
+        id: string;
+    } & Record<string | number, string | undefined>,
+    Record<string, any>
+>;
+
+//FUNCIONES A EXPORTAR
+export const getObjetos = async (context:GetObjetosContext) => {
+    const objetos = await objetosCollection.find({}).toArray();
+    context.response.body = objetos.map((objeto) => ({
+        id: objeto._id.toString(),
+        campoN: objeto.campoN,
+    }));
+};
+
+export const getObjeto = async (context: GetObjetoContext) => {
+    if (context.params?.id){
+        const objeto: ObjetoSchema | undefined = await objetosCollection.findOne({
+            _id: new ObjectId(context.params.id),
+        });
+
+        if (objeto){
+            context.response.body = objeto;
+            return;
+        }
+    }
+
+    context.response.status = 404;
+};
+
+
+
+

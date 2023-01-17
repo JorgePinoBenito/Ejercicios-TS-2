@@ -1,0 +1,6 @@
+1) types.ts
+2) schemas.ts
+3) mongo.ts
+4) (todos los que cuelguen de resolvers) 
+	en todos los ficheros, ponerimport { RouterContext } from "https://deno.land/x/oak@v11.1.0/router.ts";
+5) main.ts

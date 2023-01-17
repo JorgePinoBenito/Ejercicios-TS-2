@@ -1,0 +1,53 @@
+import { ObjectId } from "https://deno.land/x/mongo@v0.31.1/mod.ts";
+import { RouterContext } from "https://deno.land/x/oak@v11.1.0/router.ts";
+import { objetosCollection } from "../db/mongo.ts";
+
+//tipados
+type PutObjetoContext = RouterContext<
+    "/objetos/:id",
+    {
+        id: string;
+    } & Record<string | number, string | undefined>,
+    Record<string, any>
+>;
+
+
+//funciones
+export const putObjeto = async (context: PutObjetoContext) => {
+    try{
+        if (context.params?.id){
+            const result = context.request.body({ type: "json" });
+            const value = await result.value;
+            if (!value?.campo1 && !value?.campoN) {
+                context.response.status = 400;
+                return;
+            }
+            const count = await objetosCollection.updateOne(
+                { _id: new ObjectId(context.params.id) },
+                {
+                    $set: {
+                        campo1: value.campo1,
+                        campoN: value.campoN,
+                    },
+                }
+            );
+            if (count) {
+                const objeto = await objetosCollection.findOne({
+                    _id: new ObjectId(context.params.id),
+                });
+                context.response.body = {
+                    id: objeto?._id.toString(),
+                    campoN: objeto?.campoN,
+                };
+                context.response.status = 200;
+            }
+            else {
+                context.response.status = 404;
+                context.response.body = { message: "Objeto no encontrado" };
+            }
+    }
+    } catch (e) {
+        console.error(e);
+        context.response.status = 500;
+      }
+};

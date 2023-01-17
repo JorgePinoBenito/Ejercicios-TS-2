@@ -1,0 +1,4 @@
+types
+schema
+conexion mongo
+primer endpoint (devuelve hola)

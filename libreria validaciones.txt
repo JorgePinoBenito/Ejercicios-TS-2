@@ -1,0 +1,186 @@
+***FUNCIONES EN EL PROPIO ARCHIVO***
+
+//funcion para comprobar que el dni es valido con expresion regular y longitud
+const checkDni1 = (dni: string): boolean => {
+  const dniRegex = /^[0-9]{8}[A-Z]$/;
+  //comprobar que el dni tiene 9 caracteres
+  if (!dni || dni.length !== 9 || !dniRegex.test(dni)) {
+    return false;
+  }
+  return true;
+};
+
+//funcion para comprobar que el dni es valido con expresion regular y longitud
+const checkDni2 = (dni: string): boolean => {
+  const dniRegex = /^[0-9]{8}[A-Z]$/;
+  //comprobar que el dni tiene 9 caracteres
+  if (!dni || dni.length !== 9) {
+    return false;
+  }
+  //comprobar que el dni es valido con expresion regular
+  return dniRegex.test(dni);
+};
+
+//funcion para comprobar que el email es valido con expresion regular y longitud
+const checkEmail1 = (email: string): boolean => {
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  //comprobar que el email tiene 9 caracteres
+  if (
+    !email ||
+    email.length < 5 ||
+    email.length > 50 ||
+    !emailRegex.test(email)
+  ) {
+    return false;
+  }
+  return true;
+};
+
+//funcion para comprobar que el email es valido con expresion regular y longitud
+const checkEmail2 = (email: string): boolean => {
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  //comprobar que el email tiene 9 caracteres
+  if (!email || email.length < 5 || email.length > 50) {
+    return false;
+  }
+  //comprobar que el email es valido con expresion regular
+  return emailRegex.test(email);
+};
+
+//funcion para comprobar que el telefono es valido con expresion regular y longitud
+const checkPhone1 = (phone: string): boolean => {
+  const phoneRegex = /^[0-9]{9}$/;
+  //comprobar que el telefono tiene 9 caracteres
+  if (!phone || phone.length !== 9 || !phoneRegex.test(phone)) {
+    return false;
+  }
+  return true;
+};
+
+//funcion para comprobar que el telefono es valido con expresion regular y longitud
+const checkPhone2 = (phone: string): boolean => {
+  const phoneRegex = /^[0-9]{9}$/;
+  //comprobar que el telefono tiene 9 caracteres
+  if (!phone || phone.length !== 9) {
+    return false;
+  }
+  //comprobar que el telefono es valido con expresion regular
+  return phoneRegex.test(phone);
+};
+
+//funcion para comprobar que un numero es positivo
+const checkPositiveNumber = (number: number): boolean => {
+  //comprobar que el numero es positivo
+  if (number < 0) {
+    return false;
+  }
+  return true;
+};
+
+//funcion para comprobar que un numero es entero
+const checkIntegerNumber = (number: number): boolean => {
+  //comprobar que el numero es entero
+  if (number % 1 !== 0) {
+    return false;
+  }
+  return true;
+};
+
+-----------------------------------------------------------------------------------------------------
+***FUNCIONES EN ARCHIVO EXTERNO (VALIDATION.TS)***
+
+import {
+    checkDni, 
+    checkEmail, 
+    checkPhone,
+    checkPositiveNumber,
+    checkIntegerNumber,
+} from "../model/validation.ts";
+
+import * as validator from "./validation.ts";
+
+//funcion para comprobar que el dni es valido con expresion regular y longitud
+export function checkDni1 = (dni: string): boolean => {
+  const dniRegex = /^[0-9]{8}[A-Z]$/;
+  //comprobar que el dni tiene 9 caracteres
+  if (!dni || dni.length !== 9 || !dniRegex.test(dni)) {
+    return false;
+  }
+  return true;
+};
+
+//funcion para comprobar que el dni es valido con expresion regular y longitud
+export function checkDni2 = (dni: string): boolean => {
+  const dniRegex = /^[0-9]{8}[A-Z]$/;
+  //comprobar que el dni tiene 9 caracteres
+  if (!dni || dni.length !== 9) {
+    return false;
+  }
+  //comprobar que el dni es valido con expresion regular
+  return dniRegex.test(dni);
+};
+
+//funcion para comprobar que el email es valido con expresion regular y longitud
+export function checkEmail1 = (email: string): boolean => {
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  //comprobar que el email tiene 9 caracteres
+  if (
+    !email ||
+    email.length < 5 ||
+    email.length > 50 ||
+    !emailRegex.test(email)
+  ) {
+    return false;
+  }
+  return true;
+};
+
+//funcion para comprobar que el email es valido con expresion regular y longitud
+export function checkEmail2 = (email: string): boolean => {
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  //comprobar que el email tiene 9 caracteres
+  if (!email || email.length < 5 || email.length > 50) {
+    return false;
+  }
+  //comprobar que el email es valido con expresion regular
+  return emailRegex.test(email);
+};
+
+//funcion para comprobar que el telefono es valido con expresion regular y longitud
+export function checkPhone1 = (phone: string): boolean => {
+  const phoneRegex = /^[0-9]{9}$/;
+  //comprobar que el telefono tiene 9 caracteres
+  if (!phone || phone.length !== 9 || !phoneRegex.test(phone)) {
+    return false;
+  }
+  return true;
+};
+
+//funcion para comprobar que el telefono es valido con expresion regular y longitud
+export function checkPhone2 = (phone: string): boolean => {
+  const phoneRegex = /^[0-9]{9}$/;
+  //comprobar que el telefono tiene 9 caracteres
+  if (!phone || phone.length !== 9) {
+    return false;
+  }
+  //comprobar que el telefono es valido con expresion regular
+  return phoneRegex.test(phone);
+};
+
+//funcion para comprobar que un numero es positivo
+export function checkPositiveNumber = (number: number): boolean => {
+  //comprobar que el numero es positivo
+  if (number < 0) {
+    return false;
+  }
+  return true;
+};
+
+//funcion para comprobar que un numero es entero
+export function checkIntegerNumber = (number: number): boolean => {
+  //comprobar que el numero es entero
+  if (number % 1 !== 0) {
+    return false;
+  }
+  return true;
+};

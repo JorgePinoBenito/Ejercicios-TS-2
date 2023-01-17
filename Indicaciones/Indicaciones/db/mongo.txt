@@ -1,0 +1,31 @@
+import {MongoClient, Database} from "https://deno.land/x/mongo@v0.31.1/mod.ts";
+import { ObjetoSchema } from "./schemas.ts";
+import { config } from "https://deno.land/x/dotenv@v3.2.0/mod.ts";
+
+
+const env = config();
+
+if (!env.MONGO_USR || !env.MONGO_PWD){
+    throw Error("Necesitas crear variables del entorno MONGO_USR y MODO_PWD")
+}
+
+const conectMongoDB = async(): Promise<Database> => {
+    
+    env.MONGO_USR;
+    env.MONGO_PWD;
+
+    const db_cluster_url = "link .net";
+    const db_name = "nombreBD";
+
+    const client = new MongoClient();
+
+    await client.connect(`mongodb+srv://${env.MONGO_USR}:${env.MONGO_PWD}@${db_cluster_url}/${db_name}?authMechanism=SCRAM-SHA-1`);
+
+    const db = client.database(db_name);
+    return db;
+}
+
+const db = await conectMongoDB();
+console.info(`MongoDB ${db.name} connected`);
+
+export const objetosCollection = db.collection<ObjetoSchema>("objetos");

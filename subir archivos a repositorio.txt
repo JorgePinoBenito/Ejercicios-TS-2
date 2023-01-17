@@ -1,0 +1,25 @@
+*crear un repositorio y subir archivos por primera vez*
+
+git init
+git add .
+git commit -m "lo que sea"
+git branch -M main
+git remote add origin enlace del repositorio
+git push -u origin main 
+
+
+*actualizar repositorio existente con modificaciones de archivos o nuevos archivos*
+
+git status
+git add .
+git commit -m "lo que sea"
+git push -u origin main 
+
+
+*push de un repositorio existente*
+
+git remote add enlace del repositorio
+git branch -M main
+git push -u origin main
+
+

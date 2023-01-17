@@ -1,0 +1,17 @@
+Imagínate “los usuarios deben tener dni único y por tanto no pueden estar repetidos”
+
+pues lo buscas
+
+const result = await collection.findOne({dni: xxxxx})
+if (result !== undefined) throw error
+
+const citacondnirepetido = await slotsCollection.findOne({
+      dni: validatedSlot.dni,
+    });
+    if (citacondnirepetido) {
+      context.response.status = 404;
+      context.response.body = {
+        message: "Ya existe una cita con ese DNI",
+      };
+      return;
+    }

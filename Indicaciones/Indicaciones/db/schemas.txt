@@ -1,0 +1,4 @@
+import { ObjectId } from "https://deno.land/x/mongo@v0.31.1/mod.ts";
+import { Objeto } from "../types.ts";
+
+export type ObjetoSchema = Omit<Objeto, "id"> & {_id: ObjectId};

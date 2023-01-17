@@ -1,0 +1,9 @@
+{
+  "imports": {
+    "mongo": "https://deno.land/x/mongo@v0.31.1/mod.ts",
+    "apollo": "npm:@apollo/server@^4.1",
+    "server": "npm:@apollo/server@^4.1/standalone",
+    "graphql": "npm:graphql@16.6",
+    "dotenv": "https://deno.land/x/dotenv/mod.ts"
+  }
+}

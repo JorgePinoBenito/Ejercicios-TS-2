@@ -1,0 +1,41 @@
+import { RouterContext } from "https://deno.land/x/oak@v11.1.0/router.ts";
+import { ObjetoSchema } from "../db/schemas.ts";
+import { Objeto} from "../types.ts";
+import { objetoCollection } from "../db/mongo.ts";
+
+type PostObjetosContext = RouterContext<
+    "/addxxxxx",
+    Record<string | number, string | undefined>,
+    Record<string, any>
+>;
+
+export const postAddObjeto =async (context:PostObjetosContext) => {
+    try{
+        const result = context.request.body({type: "json"});
+        const value = await result.value;
+        if (!value?.campo1 || !value?.campo2 || ... || !value?.campoN){
+            context.response.status = 400;
+            return;
+        }
+        const objeto: Partial<Objeto> = {
+            campoN: value.campoN,
+        };
+        const existia = await objetosCollection.findOne({unico: value.unico});
+        if (existia){
+            context.response.status = 400;
+            context.response.body = {mensaje: "No puede haber mas de un objeto con ese campo"};
+            return;
+        }
+        const id = await objetosCollection.insertOne(objeto as ObjetoSchema);
+        objeto.id = id.toString();
+        context.response.body = {
+            id: objeto.id,
+            campoN: objeto.campoN,
+        }
+
+    } catch (e) {
+        console.error(e);
+        context.response.status = 500;
+      }
+}
+

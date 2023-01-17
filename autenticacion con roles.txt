@@ -1,0 +1,4 @@
+users: (parent, args, contextValue) => {
+  if (!contextValue.user || !contextValue.user.roles.includes('admin')) return null;
+  return contextValue.models.User.getAll();
+};
